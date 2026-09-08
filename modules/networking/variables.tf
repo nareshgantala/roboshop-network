@@ -1,4 +1,3 @@
-
 variable "vpc_cidr" {
   type        = string
   description = "CIDR block for VPC"
@@ -6,16 +5,11 @@ variable "vpc_cidr" {
 
 variable "project" {
   type        = string
-  description = "name of the project"
+  description = ""
   default     = "roboshop"
 }
 
 variable "env" {
   type        = string
   description = "Environment"
-}
-
-variable "instance_type" {
-  type    = string
-  default = "t3.micro"
 }
