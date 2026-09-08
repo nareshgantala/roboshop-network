@@ -2,6 +2,9 @@
 
 # Exit immediately if a command exits with a non-zero status
 set -e
+echo "--> Ensuring AWS SSM Agent is installed and active..."
+sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm || true
+sudo systemctl enable --now amazon-ssm-agent
 
 # --- CONFIGURATION VARIABLES ---
 SONAR_VERSION="10.8.0.101718" # Replace with the specific version you need

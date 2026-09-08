@@ -1,6 +1,9 @@
 #!/bin/bash
 # Stop script if any individual command fails
 set -e
+echo "--> Ensuring AWS SSM Agent is installed and active..."
+sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm || true
+sudo systemctl enable --now amazon-ssm-agent
 
 echo "=========================================================="
 echo " Starting Bastion / Jenkins Worker Installation on RHEL"

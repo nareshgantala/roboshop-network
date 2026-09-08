@@ -10,21 +10,10 @@ resource "aws_instance" "main" {
     volume_size = 50
     volume_type = "gp3" # Optional: defaults to standard or gp2 depending on provider version
   }
-
+  user_data = file("${path.module}/../../scripts/bastion.sh")
 
   tags = {
     Name = "${var.project}-${var.env}-bastion"
   }
 
-  provisioner "file" {
-    source      = "${path.module}/../../scripts/bastion.sh"
-    destination = "/home/ec2-user/bastion.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /home/ec2-user/bastion.sh",
-      "/home/ec2-user/bastion.sh"
-    ]
-  }
 }
