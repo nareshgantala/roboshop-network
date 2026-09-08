@@ -1,6 +1,6 @@
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.project}-${var.env}-ec2-sg"
-  description = ""
+  description = "Security group for EC2 instances"
   vpc_id      = var.vpc_id
   ingress {
     description = "Internal SSH for Jenkins Controller to Worker Node"
