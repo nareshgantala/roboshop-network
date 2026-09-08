@@ -1,17 +1,17 @@
 module "networking" {
-  source   = "../modules/networking"
+  source   = "./modules/networking"
   vpc_cidr = var.vpc_cidr
   project  = var.project
   env      = var.env
 }
 
 module "iam" {
-  source  = "../modules/iam"
+  source  = "./modules/iam"
   project = var.project
   env     = var.env
 }
 module "security" {
-  source  = "../modules/security"
+  source  = "./modules/security"
   vpc_id  = module.networking.vpc_id
   project = var.project
   env     = var.env
@@ -19,7 +19,7 @@ module "security" {
 
 
 module "bastion" {
-  source        = "../modules/bastion"
+  source        = "./modules/bastion"
   subnet_id     = module.networking.public_subnet_id[0]
   sg_id         = module.security.ec2_sg_id
   project       = var.project
@@ -30,7 +30,7 @@ module "bastion" {
 
 
 module "jenkins" {
-  source        = "../modules/jenkins"
+  source        = "./modules/jenkins"
   subnet_id     = module.networking.public_subnet_id[0]
   sg_id         = module.security.ec2_sg_id
   project       = var.project
@@ -41,7 +41,7 @@ module "jenkins" {
 
 
 module "sonarqube" {
-  source        = "../modules/sonarQube"
+  source        = "./modules/sonarQube"
   subnet_id     = module.networking.public_subnet_id[0]
   sg_id         = module.security.ec2_sg_id
   project       = var.project
