@@ -69,10 +69,6 @@ resource "aws_route_table" "private" {
   }
 }
 
-resource "aws_route_table_association" "infra" {
-  subnet_id      = aws_subnet.infra_subnet.id
-  route_table_id = aws_route_table.private.id
-}
 
 
 resource "aws_route_table_association" "data" {
@@ -86,27 +82,19 @@ resource "aws_route_table_association" "app" {
 }
 
 
-resource "aws_subnet" "infra_subnet" {
-  availability_zone = data.aws_availability_zones.available.names[0]
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 0)
-
-  tags = {
-    Name = "${var.project}-${var.env}-infra-subnet"
-  }
-}
-
 resource "aws_subnet" "app_subnet" {
-  availability_zone = data.aws_availability_zones.available.names[0]
+  count             = 2
+  availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 1)
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 1)
 
   tags = {
-    Name = "${var.project}-${var.env}-app-subnet"
+    Name = "${var.project}-${var.env}-app-subnet-${count.index}"
   }
 }
 
 resource "aws_subnet" "data_subnet" {
+
   availability_zone = data.aws_availability_zones.available.names[0]
   vpc_id            = aws_vpc.main.id
   cidr_block        = cidrsubnet(var.vpc_cidr, 8, 2)
@@ -115,3 +103,4 @@ resource "aws_subnet" "data_subnet" {
     Name = "${var.project}-${var.env}-data-subnet"
   }
 }
+
