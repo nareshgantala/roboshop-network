@@ -77,7 +77,8 @@ resource "aws_route_table_association" "data" {
 }
 
 resource "aws_route_table_association" "app" {
-  subnet_id      = aws_subnet.app_subnet.id
+  count          = 2
+  subnet_id      = aws_subnet.app_subnet[count.index].id
   route_table_id = aws_route_table.private.id
 }
 
