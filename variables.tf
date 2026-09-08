@@ -1,3 +1,4 @@
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR block for VPC"
@@ -5,7 +6,7 @@ variable "vpc_cidr" {
 
 variable "project" {
   type        = string
-  description = ""
+  description = "name of the project"
   default     = "roboshop"
 }
 
