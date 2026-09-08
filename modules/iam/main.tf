@@ -48,7 +48,15 @@ resource "aws_iam_policy" "s3_access_policy" {
           "s3:GetObject",
           "s3:PutObject",
           "s3:ListBucket",
-          "s3:DeleteObject"
+          "s3:DeleteObject",
+          "ec2:DescribeVpcs",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeInstances",
+          "ec2:DescribeRouteTables",
+          "ec2:DescribeInternetGateways",
+          "ec2:DescribeAvailabilityzones",
+          "ec2:DescribeVpcAttribute"
         ]
         Effect   = "Allow"
         Resource = "*"
