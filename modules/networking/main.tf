@@ -19,7 +19,7 @@ resource "aws_subnet" "public_subnet" {
   count             = 2
   availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 3)
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 0)
 
   tags = {
     Name = "${var.project}-${var.env}-public-subnet-${count.index}"
@@ -87,7 +87,7 @@ resource "aws_subnet" "app_subnet" {
   count             = 2
   availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 1)
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 4)
 
   tags = {
     Name = "${var.project}-${var.env}-app-subnet-${count.index}"
@@ -98,7 +98,7 @@ resource "aws_subnet" "data_subnet" {
 
   availability_zone = data.aws_availability_zones.available.names[0]
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 2)
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 6)
 
   tags = {
     Name = "${var.project}-${var.env}-data-subnet"
