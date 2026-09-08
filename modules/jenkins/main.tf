@@ -11,6 +11,17 @@ resource "aws_instance" "main" {
     volume_type = "gp3" # Optional: defaults to standard or gp2 depending on provider version
   }
 
+  provisioner "file" {
+    source      = "../scripts/jenkins.sh"
+    destination = "/home/ec2-user/jenkins.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ec2-user/jenkins.sh",
+      "/home/ec2-user/jenkins.sh"
+    ]
+  }
 
   tags = {
     Name = "${var.project}-${var.env}-jenkins"

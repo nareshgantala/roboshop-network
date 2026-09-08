@@ -15,4 +15,16 @@ resource "aws_instance" "main" {
   tags = {
     Name = "${var.project}-${var.env}-bastion"
   }
+
+  provisioner "file" {
+    source      = "../scripts/bastion.sh"
+    destination = "/home/ec2-user/bastion.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ec2-user/bastion.sh",
+      "/home/ec2-user/bastion.sh"
+    ]
+  }
 }

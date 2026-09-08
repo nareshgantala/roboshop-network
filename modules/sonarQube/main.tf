@@ -11,6 +11,17 @@ resource "aws_instance" "main" {
     volume_type = "gp3" # Optional: defaults to standard or gp2 depending on provider version
   }
 
+  provisioner "file" {
+    source      = "../../scripts/sonar.sh"
+    destination = "/home/ec2-user/sonar.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ec2-user/sonar.sh",
+      "/home/ec2-user/sonar.sh"
+    ]
+  }
 
   tags = {
     Name = "${var.project}-${var.env}-sonar"
