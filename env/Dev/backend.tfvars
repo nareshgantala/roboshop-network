@@ -1,2 +1,2 @@
 bucket = "roboshop-aws-terraform"
-key    = "roboshop-network/terraform.tfstate"
+key    = "roboshop-network/dev/terraform.tfstate"
