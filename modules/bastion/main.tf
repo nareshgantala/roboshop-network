@@ -17,7 +17,7 @@ resource "aws_instance" "main" {
   }
 
   provisioner "file" {
-    source      = "../scripts/bastion.sh"
+    source      = "${path.module}/../../scripts/bastion.sh"
     destination = "/home/ec2-user/bastion.sh"
   }
 

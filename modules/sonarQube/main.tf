@@ -12,7 +12,7 @@ resource "aws_instance" "main" {
   }
 
   provisioner "file" {
-    source      = "../../scripts/sonar.sh"
+    source      = "${path.module}/../../scripts/sonar.sh"
     destination = "/home/ec2-user/sonar.sh"
   }
 

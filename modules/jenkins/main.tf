@@ -12,7 +12,7 @@ resource "aws_instance" "main" {
   }
 
   provisioner "file" {
-    source      = "../scripts/jenkins.sh"
+    source      = "${path.module}/../../scripts/jenkins.sh"
     destination = "/home/ec2-user/jenkins.sh"
   }
 

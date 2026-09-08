@@ -25,7 +25,7 @@ module "bastion" {
   project       = var.project
   env           = var.env
   profile       = module.iam.profile_id
-  instance_type = var.instance_type
+  instance_type = var.bastion_instance_type
 }
 
 
@@ -36,7 +36,7 @@ module "jenkins" {
   project       = var.project
   env           = var.env
   profile       = module.iam.profile_id
-  instance_type = var.instance_type
+  instance_type = var.jenkins_instance_type
 }
 
 
@@ -47,7 +47,7 @@ module "sonarqube" {
   project       = var.project
   env           = var.env
   profile       = module.iam.profile_id
-  instance_type = var.instance_type
+  instance_type = var.sonarqube_instance_type
 }
 
 
